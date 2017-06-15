@@ -11,7 +11,7 @@ class People
   include DataMapper::Resource
 
   property :id,           Serial    # An auto-increment integer key
-  property :deputy_id,      Integer
+  property :deputy_id,    Integer,  :index=>true
   property :first_name,   String
   property :middle_name,  String
   property :last_name,    String
