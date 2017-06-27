@@ -9,7 +9,7 @@ class ScrapeMp
      page.css('ul.childpages a').each_with_index do |mp, index|
        scrape_mp(mp[:href], mp.text, 5001 + index)
      end
-    # resigned_mp()
+    resigned_mp()
     create_mer()
   end
   def create_mer
@@ -33,7 +33,20 @@ class ScrapeMp
     Nokogiri::HTML(open(url, "User-Agent" => "HTTP_USER_AGENT:Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US) AppleWebKit/534.13 (KHTML, like Gecko) Chrome/9.0.597.47"), nil, 'utf-8')
   end
   def resigned_mp
-
+    names = %w{Омельчук Олександр Андрійович}
+    People.first_or_create(
+        first_name: names[1],
+        middle_name: names[2],
+        last_name: names[0],
+        full_name: names.join(' '),
+        deputy_id: 4999,
+        okrug: nil,
+        photo_url: "https://mkrada.gov.ua/files/deputati/61.img.jpg",
+        faction: "Опозиційний блок",
+        end_date:  "2016-12-23",
+        created_at: "9999-12-31",
+        updated_at: "9999-12-31"
+    )
   end
   def scrape_mp(url, mp, rada_id , date_end = nil )
     if date_end.nil?
@@ -85,21 +98,38 @@ class ScrapeMp
         faction: party,
     )
     unless people.nil?
-    people.update(end_date:  date_end,  updated_at: Time.now)
+        people.update(end_date:  date_end,  updated_at: Time.now)
     else
-      People.create(
-          first_name: name_array[1],
-          middle_name: name_array[2],
-          last_name: name_array[0],
-          full_name: name_array.join(' '),
-          deputy_id: rada_id,
-          okrug: nil,
-          photo_url: image,
-          faction: party,
-          end_date:  date_end,
-          created_at: Time.now,
-          updated_at: Time.now
-      )
+      if rada_id == 5030
+        People.create(
+            first_name: name_array[1],
+            middle_name: name_array[2],
+            last_name: name_array[0],
+            full_name: name_array.join(' '),
+            deputy_id: rada_id,
+            okrug: nil,
+            photo_url: image,
+            faction: party,
+            end_date:  date_end,
+            start_date:  "2017-01-13",
+            created_at: Time.now,
+            updated_at: Time.now
+        )
+      else
+        People.create(
+            first_name: name_array[1],
+            middle_name: name_array[2],
+            last_name: name_array[0],
+            full_name: name_array.join(' '),
+            deputy_id: rada_id,
+            okrug: nil,
+            photo_url: image,
+            faction: party,
+            end_date:  date_end,
+            created_at: Time.now,
+            updated_at: Time.now
+        )
+      end
     end
   end
 end
