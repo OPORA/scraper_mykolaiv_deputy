@@ -67,7 +67,7 @@ class ScrapeMp
       if p.text[/(Партійність|Партіійність|Член)/]
         hash[:party] = p.text
         next
-      elsif p.text[/(Позапартійний|позапартійний|Позафракційний)/] or p.text[/(Позапартійна|позапартійна)/] 
+      elsif p.text[/(Позапартійний|позапартійний|Позафракційний)/] or p.text[/(Позапартійна|позапартійна)/] or uri == "https://mkrada.gov.ua/content/kazakova-tetyana-viktorivna.html"
         hash[:party] = "Позафракційні"
         next
       end
