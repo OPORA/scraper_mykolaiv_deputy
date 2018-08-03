@@ -81,7 +81,7 @@ class ScrapeMp
        party = "Блок Петра Порошенка"
     elsif hash[:party].include?("САМОПОМІЧ") or hash[:party].include?("Самопоміч")
        party = "Самопоміч"
-    elsif hash[:party].include?("Наш край")
+    elsif hash[:party].include?("Наш край") or hash[:party].include?("Наш Край")
       party = "Наш край"
     else
       raise hash[:party]
