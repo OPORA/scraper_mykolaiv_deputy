@@ -79,7 +79,7 @@ class ScrapeMp
        party = "Позафракційні"
     elsif hash[:party].include?("Солідарність") or  hash[:party].include?("СОЛІДАРНІСТЬ")
        party = "Блок Петра Порошенка"
-    elsif hash[:party].include?("САМОПОМІЧ")
+    elsif hash[:party].include?("САМОПОМІЧ") or hash[:party].include?("Самопоміч")
        party = "Самопоміч"
     elsif hash[:party].include?("Наш край")
       party = "Наш край"
