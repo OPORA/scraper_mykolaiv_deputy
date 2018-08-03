@@ -64,7 +64,7 @@ class ScrapeMp
     p image
     hash = {}
     page_mp.css('.p-content__inner p').each do |p|
-      if p.text[/Член/]
+      if p.text[/Партіійність:/]
         hash[:party] = p.text
         next
       elsif p.text[/(Позапартійний|позапартійний)/] or p.text[/(Позапартійна|позапартійна)/]
